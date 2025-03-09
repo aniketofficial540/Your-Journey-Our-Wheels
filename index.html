@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Guider</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div class="container">
+        <div id="c1">
+            <div id="navbar">
+                <a href="#">Home</a>
+                <a href="#">Product</a>
+                <a href="#">Details</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="Slogan">Your Journey, Our Wheels</p>
+            <p class="slogan-child">At <b>Travellor</b>, we believe every journey should be smooth and convenient.
+                Explore our fleet of well-maintained vehicles, flexible rental plans, and easy booking options. Drive
+                your way, on your terms!</p>
+            <!-- Add this inside your #c1 div (after slogan-child) -->
+            <div class="booking-form" id="bookingForm">
+                <div class="form-header">
+                    <h2>Complete Your Booking</h2>
+                    <div class="close-form">&times;</div>
+                </div>
+                <form id="bookingDetails">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="John Doe"
+                            pattern="[A-Za-z ]{3,}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+1 234 567 890"
+                            pattern="[+0-9]{10,}">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" required min="18" max="100" placeholder="25">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookingDate">Booking Date & Time</label>
+                            <input type="datetime-local" id="bookingDate" name="bookingDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Delivery Address</label>
+                        <textarea id="address" name="address" required rows="3"
+                            placeholder="Enter full address"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Confirm Booking</button>
+                </form>
+            </div>
+            <button class="book-now-btn">Book Now</button>
+
+            <div style="height: 500px;" class="plans-container" id="plansContainer">
+                <div class="close-btn">&times;</div>
+                <div class="plan-box">
+                    <h3>City Scooter</h3>
+                    <p>Perfect for urban exploration</p>
+                    <ul>
+                        <li>Up to 50 km range</li>
+                        <li>2-hour minimum</li>
+                        <li>Helmet included</li>
+                    </ul>
+                    <div class="price">$15<span>/hour</span></div>
+                    <button class="choose-plan">Choose Plan</button>
+                </div>
+                <div class="plan-box">
+                    <h3>Premium Car</h3>
+                    <p>Comfort for long drives</p>
+                    <ul>
+                        <li>Unlimited mileage</li>
+                        <li>24/7 support</li>
+                        <li>Insurance included</li>
+                    </ul>
+                    <div class="price">$45<span>/day</span></div>
+                    <button class="choose-plan">Choose Plan</button>
+                </div>
+                <div class="plan-box">
+                    <h3>Luxury SUV</h3>
+                    <p>Special occasions & groups</p>
+                    <ul>
+                        <li>Premium insurance</li>
+                        <li>Chauffeur option</li>
+                        <li>Child seats available</li>
+                    </ul>
+                    <div class="price">$85<span>/day</span></div>
+                    <button class="choose-plan">Choose Plan</button>
+                </div>
+            </div>
+            <div class="circle-container">
+                <div class="circle"></div>
+            </div>
+            <img class="image1" src="scooter.png" alt="scooter">
+
+        </div>
+        <div id="c2">
+            <div id="c2-1"></div>
+            <div id="c2-2"></div>
+        </div>
+    </div>
+
+</body>
+<script>
+    const bookNowBtn = document.querySelector('.book-now-btn');
+    const plansContainer = document.getElementById('plansContainer');
+    const closeBtn = document.querySelector('.close-btn');
+    const container = document.querySelector('.container');
+
+    // Show plans
+    bookNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        plansContainer.classList.add('active');
+    });
+
+    // Hide plans
+    closeBtn.addEventListener('click', () => {
+        plansContainer.classList.remove('active');
+    });
+
+    // Close when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === plansContainer) {
+            plansContainer.classList.remove('active');
+        }
+    });
+
+    // Handle plan selection
+    document.querySelectorAll('.choose-plan').forEach(button => {
+        button.addEventListener('click', () => {
+            // Add your booking logic here
+            plansContainer.classList.remove('active');
+        });
+    });
+
+    const overlay = document.getElementById('overlay');
+
+    bookNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        plansContainer.classList.add('active');
+        overlay.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        plansContainer.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            plansContainer.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+    
+    document.querySelectorAll('.choose-plan').forEach(button => {
+        button.addEventListener('click', () => {
+            plansContainer.classList.remove('active');
+            overlay.classList.remove('active');
+            document.getElementById('bookingForm').classList.add('active');
+            overlay.classList.add('active');
+        });
+    });
+
+    const closeForm = document.querySelector('.close-form');
+    const bookingForm = document.getElementById('bookingForm');
+
+    closeForm.addEventListener('click', () => {
+        bookingForm.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // Form Submission
+    document.getElementById('bookingDetails').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(e.target);
+        const bookingData = Object.fromEntries(formData.entries());
+
+        // Add your submission logic here
+        console.log('Booking Data:', bookingData);
+
+        // Show confirmation
+        alert('Booking confirmed! Check your email for details.');
+
+        // Reset and close
+        e.target.reset();
+        bookingForm.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+</script>
+</body>
+
+</html>
